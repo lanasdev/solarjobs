@@ -15,7 +15,7 @@ export default async function Navbar() {
       <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
         <div className="">
           <Link href="/" className=" font-bold text-xl">
-            NextSupabase
+            SolarJobs
           </Link>
         </div>
 

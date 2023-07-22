@@ -1,6 +1,6 @@
-# Supabase Starter
+# Solar jobs
 
-This starter configures Supabase Auth to use cookies, making the user's session available throughout the entire Next.js app - Client Components, Server Components, Route Handlers, Server Actions and Middleware.
+This is a simple app that allows users to create and manage solar jobs. It is built with Next.js and Supabase.
 
 ## Deploy your own
 

@@ -8,15 +8,6 @@ import NextJsLogo from "@/components/NextJsLogo";
 import { Job } from "@/lib/types";
 import JobCard from "./JobCard";
 
-const examples = [
-  { type: "Client Components", src: "app/_examples/client-component/page.tsx" },
-  { type: "Server Components", src: "app/_examples/server-component/page.tsx" },
-  { type: "Server Actions", src: "app/_examples/server-action/page.tsx" },
-  { type: "Route Handlers", src: "app/_examples/route-handler.ts" },
-  { type: "Middleware", src: "app/middleware.ts" },
-  { type: "Protected Routes", src: "app/_examples/protected/page.tsx" },
-];
-
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
 

@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "solarjobs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
