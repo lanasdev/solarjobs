@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Job } from "@/lib/types";
+import { Company, Job } from "@/lib/types";
 
 const resources = [
   {
@@ -26,20 +26,18 @@ const resources = [
   },
 ];
 
-export default function JobCard(job: Job) {
+export default function CompanyCard(c: Company) {
   return (
     <Link
-      key={job.slug}
-      className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mb-4"
-      href={`/job/${job.slug}`}
+      key={c.slug}
+      className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
+      href={`company/${c.slug}`}
       // target="_blank"
       // rel="noreferrer"
     >
-      <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
-        {job.name}
-      </h3>
+      <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">{c.name}</h3>
       <div className="flex flex-col grow gap-4 justify-between">
-        <p className="text-sm opacity-70">{job.description}</p>
+        <p className="text-sm opacity-70">{c.description}</p>
         <div className="flex justify-between items-center">
           <svg
             width="24"

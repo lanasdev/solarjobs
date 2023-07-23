@@ -2,11 +2,11 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
-import SupabaseLogo from "@/components/SupabaseLogo";
-import NextJsLogo from "@/components/NextJsLogo";
 
 import { Job } from "@/lib/types";
 import JobCard from "./JobCard";
+import CompanyCard from "./CompanyCard";
+import Hero from "./Hero";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
@@ -16,27 +16,14 @@ export default async function Index() {
   } = await supabase.auth.getUser();
 
   const { data: jobs, error } = await supabase.from("jobs").select("*");
+  const { data: company, error: errcompany } = await supabase
+    .from("company")
+    .select("*");
 
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
-        <div className="flex flex-col items-center mb-4 lg:mb-12">
-          <div className="flex gap-8 justify-center items-center">
-            <Link href="https://supabase.com/" target="_blank">
-              <SupabaseLogo />
-            </Link>
-            <span className="border-l rotate-45 h-6" />
-            <NextJsLogo />
-          </div>
-          <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
-            The fastest way to start building apps with{" "}
-            <strong>Supabase</strong> and <strong>Next.js</strong>
-          </p>
-          <div className="bg-foreground py-3 px-6 rounded-lg font-mono text-sm text-background">
-            Get started by editing <strong>app/page.tsx</strong>
-          </div>
-        </div>
+        <Hero />
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
@@ -46,7 +33,18 @@ export default async function Index() {
           {jobs && jobs.map((job) => <JobCard key={job.id} {...job} />)}
         </div>
 
-        {/* <pre>{JSON.stringify(jobs, null, 2)}</pre> */}
+        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+
+        <h2 className="text-2xl font-bold">Companies</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {company ? (
+            company.map((c) => <CompanyCard key={c.id} {...c} />)
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
+
+        {/* <pre>{JSON.stringify(company, null, 2)}</pre> */}
       </div>
     </div>
   );
