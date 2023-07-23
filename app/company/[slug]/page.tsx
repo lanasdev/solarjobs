@@ -78,9 +78,9 @@ export default async function JobPage({
             </div>
           </div>
 
-          {/* <div className="py-16 max-w-xl">
+          <div className="py-16 max-w-xl">
             <pre>{JSON.stringify(c, null, 2)}</pre>
-          </div> */}
+          </div>
         </main>
         {/* <aside className="xl:w-1/3 group bg-white shadow-lg rounded-lg px-4 py-6">
           <div className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 mb-8 " />

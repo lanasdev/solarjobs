@@ -22,7 +22,7 @@ export default async function CompanyCard() {
 
   const { data: company, error: errcompany } = await supabase
     .from("company")
-    .select(`*`);
+    .select("*");
 
   return (
     <div className="pt-16">
