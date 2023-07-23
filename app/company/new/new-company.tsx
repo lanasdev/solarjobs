@@ -19,6 +19,7 @@ export default async function NewCompany() {
     // const instagram = formData.get("instagram");
     // const youtube = formData.get("youtube");
 
+    // @ts-expect-error slugify types are wrong
     const slug = slugify(name, { lower: true, strict: true });
 
     const supabase = createServerActionClient({ cookies });

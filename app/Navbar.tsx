@@ -19,7 +19,7 @@ export default async function Navbar() {
           </Link>
         </div>
 
-        <div>
+        <div className="flex items-center gap-6">
           {user ? (
             <div className="flex items-center gap-4">
               Hey, {user.email}!
@@ -28,11 +28,19 @@ export default async function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+              className="py-2 px-4 rounded-md no-underline transition-colors bg-btn-background hover:bg-btn-background-hover"
             >
               Login
             </Link>
           )}
+          <div className="">
+            <Link
+              href="/job/hire"
+              className="py-2 px-4 rounded-md no-underline bg-yellow-400 hover:bg-yellow-700 transition-colors hover:text-white"
+            >
+              Post a Job
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

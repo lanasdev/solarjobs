@@ -7,6 +7,8 @@ import { cookies } from "next/headers";
 import NewCompany from "./new-company";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function CompanyCard() {
   const supabase = createServerComponentClient({ cookies });
 
