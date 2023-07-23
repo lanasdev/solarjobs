@@ -4,37 +4,55 @@ import Link from "next/link";
 import { Company } from "@/lib/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import EditCompany from "./edit-company";
 
-export default async function CompanyCard({ slug, name, logo }: Company) {
+export default async function CompanyEditPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const supabase = createServerComponentClient({ cookies });
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: company, error: errcompany } = await supabase
+  const { data: company, error } = await supabase
     .from("company")
-    .select("*");
+    .select(
+      `
+      *, 
+    jobs (
+      slug,
+      name,
+        description
+    )
+  `
+    )
+    .eq("slug", params.slug);
+
+  if (error) {
+    console.error(error);
+    return <div>Error</div>;
+  }
+
+  if (!company) {
+    return <div>Loading...</div>;
+  }
+  const c = company[0];
+
+  if (!user) {
+    redirect("/login");
+  }
+  if (user?.id !== c.user_id) {
+    return <div>Not authorized</div>;
+  }
 
   return (
-    <Link
-      href={`/company/${slug}`}
-      className="flex flex-col items-center justify-center p-4 bg-foreground/10 rounded-lg hover:bg-foreground/5 transition-colors"
-    >
-      <div className="relative w-24 h-24">
-        {logo ? (
-          <Image
-            src={logo}
-            alt={name || "Company Logo"}
-            layout="fill"
-            objectFit="contain"
-            className="rounded-lg"
-          />
-        ) : (
-          <div className="w-full h-full bg-foreground/20 rounded-lg" />
-        )}
-      </div>
-      <h3 className="text-xl font-bold">{name}</h3>
-    </Link>
+    <div className="flex flex-col items-center justify-center p-4 pt-16">
+      <h1 className="text-2xl font-bold">Edit the company</h1>
+      <EditCompany company={c} />
+    </div>
   );
 }

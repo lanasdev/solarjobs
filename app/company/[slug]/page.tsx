@@ -60,6 +60,15 @@ export default async function JobPage({
           </div>
           <p className="prose pt-16">{c.content}</p>
 
+          {user?.id === c.user_id && (
+            <Link
+              href={`/company/${c.slug}/edit`}
+              className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-lg mt-8 inline-block"
+            >
+              Edit Company Profile
+            </Link>
+          )}
+
           <div className="pt-12 ">
             <h2 className="text-xl font-semibold">Jobs</h2>
             <div className="flex overflow-x-auto space-x-8 pt-8 [&>*]:flex-shrink-0 ">

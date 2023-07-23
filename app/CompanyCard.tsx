@@ -31,7 +31,7 @@ export default function CompanyCard(c: Company) {
     <Link
       key={c.slug}
       className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
-      href={`company/${c.slug}`}
+      href={`/company/${c.slug}`}
       // target="_blank"
       // rel="noreferrer"
     >
