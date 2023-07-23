@@ -18,6 +18,10 @@ export default async function CompanyEditPage({
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user) {
+    redirect("/login");
+  }
+
   const { data: company, error } = await supabase
     .from("company")
     .select(
@@ -32,19 +36,16 @@ export default async function CompanyEditPage({
     )
     .eq("slug", params.slug);
 
-  if (error) {
-    console.error(error);
-    return <div>Error</div>;
-  }
-
   if (!company) {
     return <div>Loading...</div>;
   }
   const c = company[0];
 
-  if (!user) {
-    redirect("/login");
+  if (error) {
+    console.error(error);
+    return <div>Error</div>;
   }
+
   if (user?.id !== c.user_id) {
     return <div>Not authorized</div>;
   }

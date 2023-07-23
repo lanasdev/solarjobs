@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
+import clsx from "clsx";
 
 export default async function EditCompany({ company }: { company: Company }) {
   const c = company;
@@ -28,6 +29,7 @@ export default async function EditCompany({ company }: { company: Company }) {
     const twitter = formData.get("twitter") || c.twitter;
     const instagram = formData.get("instagram") || c.instagram;
     const youtube = formData.get("youtube") || c.youtube;
+    const content = formData.get("content") || c.content;
 
     // @ts-expect-error slugify types are wrong
     const slug = slugify(name, {
@@ -53,12 +55,14 @@ export default async function EditCompany({ company }: { company: Company }) {
         twitter,
         instagram,
         youtube,
+        content,
       })
       .eq("slug", company.slug)
       .select("*");
-    console.log(data, error);
-    revalidatePath(`/company/${slug}/edit`);
-    revalidatePath(`/company/${slug}`);
+    error && console.log(error);
+
+    revalidatePath(`/company/[slug]/edit`);
+    revalidatePath(`/company/[slug]`);
     // redirect(`/company/${slug}`);
   };
 
@@ -171,7 +175,19 @@ export default async function EditCompany({ company }: { company: Company }) {
             className={inputClassName}
           />
         </fieldset>
+        <fieldset className={clsx(fieldsetClass)}>
+          <label htmlFor="content">Content</label>
+          <textarea
+            name="content"
+            id="content"
+            defaultValue={c.content || ""}
+            cols={30}
+            rows={10}
+            className={clsx("form-textarea ", inputClassName)}
+          />
+        </fieldset>
       </div>
+
       <button
         type="submit"
         className="mt-8 bg-blue-500 hover:bg-blue-600 text-white transition-colors rounded-lg px-4 py-2"
