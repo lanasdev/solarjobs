@@ -2,7 +2,27 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-import { Job } from "@/lib/types";
+import { Job, Company } from "@/lib/types";
+import ExpandableText from "@/components/ExpandableText";
+
+interface JobDataProps {
+  Job: Job & {
+    company_slug: Company;
+  };
+}
+
+// export async function generateStaticParams() {
+//   const supabase = createServerComponentClient({ cookies });
+//   const { data: jobs, error } = await supabase.from("jobs").select("*");
+//   console.log("jobs", jobs);
+
+//   if (error) return [];
+
+//   const slugs = jobs.map((job) => job.slug);
+//   console.log("slugs", slugs);
+//   // return [{ id: "1" }, { id: "2" }, { id: "3" }];
+//   return slugs;
+// }
 
 export default async function JobPage({
   params,
@@ -17,8 +37,23 @@ export default async function JobPage({
 
   const { data: jobs, error } = await supabase
     .from("jobs")
-    .select("*")
+    .select(
+      `
+    *,
+    company_slug (
+      slug,
+      name,
+      description,
+      logo,
+      city_name,
+      content,
+      website
+    )
+    `
+    )
     .eq("slug", params.slug);
+
+  console.log("jobs", jobs);
 
   if (error) {
     console.error(error);
@@ -29,7 +64,8 @@ export default async function JobPage({
     return <div>Loading...</div>;
   }
 
-  const job: Job = jobs[0];
+  const job = jobs[0];
+  const company: Company = job.company_slug;
 
   return (
     <div className=" pt-16">
@@ -44,41 +80,96 @@ export default async function JobPage({
           <div className="pt-16">
             <p className="prose ">{job.content}</p>
           </div>
-          <div className="py-16 max-w-xl">
+          {/* <div className="py-16 max-w-xl">
             <code>{JSON.stringify(jobs, null, 2)}</code>
+          </div> */}
+          <div className=" py-8">
+            <h2 className="text-xl font-bold">Apply for this job</h2>
+            <p className="text-slate-500">
+              You must be logged in to apply for this job.
+            </p>
+            <div className="pt-8">
+              {user ? (
+                <>
+                  {job.hire_url ? (
+                    <Link
+                      href={job.hire_url}
+                      className="bg-blue-500 text-white rounded px-4 py-2"
+                    >
+                      Apply
+                    </Link>
+                  ) : (
+                    <button className="bg-gray-300 inline-block text-white rounded px-4 py-2">
+                      No application link
+                    </button>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="bg-blue-500 text-white rounded px-4 py-2"
+                >
+                  Login
+                </Link>
+              )}
+
+              {/* <div className="pt-8">
+            <pre className="max-w-md">{JSON.stringify(user, null, 2)}</pre>
+          </div> */}
+            </div>
           </div>
         </main>
         <aside className="xl:w-1/3 group bg-white shadow-lg rounded-lg px-4 py-6">
-          <div className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 mb-8 " />
-          <h2 className="text-xl font-semibold">{job.company_name}</h2>
-          <span className="text-gray-500">
-            {`lat: ${job.lat}, long: ${job.long}`}
-          </span>
-        </aside>
-      </div>
-      <div className="px-4 py-6">
-        <h2 className="text-xl font-bold">Apply for this job</h2>
-        <p className="text-gray-500">
-          You must be logged in to apply for this job.
-        </p>
-        <div className="pt-8">
-          {user ? (
-            <button className="bg-blue-500 text-white rounded px-4 py-2">
-              Apply
-            </button>
+          {company.logo ? (
+            <img
+              src={company.logo}
+              alt={company.name || "Company logo"}
+              className="rounded-full hover:bg-slate-300 w-24 h-24 mb-8 "
+            />
           ) : (
-            <Link
-              href="/login"
-              className="bg-blue-500 text-white rounded px-4 py-2"
-            >
-              Login
-            </Link>
+            <span className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 mb-8 " />
           )}
-
-          <div className="pt-8">
-            <pre className="max-w-md">{JSON.stringify(user, null, 2)}</pre>
+          <h2 className="text-xl font-semibold">{company.name}</h2>
+          <span className="text-slate-500">
+            {/* {`lat: ${job.lat}, long: ${job.long}`} */} {company.website} -{" "}
+            {company.city_name}
+          </span>
+          {company.content && (
+            <ExpandableText
+              content={company.content}
+              maxLines={6}
+              classNames="text-slate-700 pt-16 "
+            />
+          )}
+          <div className="flex flex-col pt-8 gap-2">
+            <Link
+              href={`/company/${company.slug}`}
+              className=" hover:underline"
+            >
+              View company
+            </Link>
+            {company.website && (
+              <Link href={company.website} className=" hover:underline">
+                {company.website}
+              </Link>
+            )}
+            {company.twitter && (
+              <Link href={company.twitter} className=" hover:underline">
+                Twitter
+              </Link>
+            )}
+            {company.instagram && (
+              <Link href={company.instagram} className=" hover:underline">
+                Instagram
+              </Link>
+            )}
+            {company.youtube && (
+              <Link href={company.youtube} className=" hover:underline">
+                YouTube
+              </Link>
+            )}
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
