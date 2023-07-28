@@ -119,7 +119,7 @@ export default async function JobPage({
             </div>
           </div>
         </main>
-        <aside className="xl:w-1/3 group bg-white shadow-lg rounded-lg px-4 py-6">
+        <aside className="md:w-1/3 group bg-white shadow-lg rounded-lg px-4 py-6">
           {company.logo ? (
             <img
               src={company.logo}
@@ -129,11 +129,14 @@ export default async function JobPage({
           ) : (
             <span className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 mb-8 " />
           )}
-          <h2 className="text-xl font-semibold">{company.name}</h2>
+          <Link href={`/company/${company.slug}`} className="">
+            <h2 className="text-xl font-semibold ">{company.name}</h2>
+          </Link>
           <span className="text-slate-500">
             {/* {`lat: ${job.lat}, long: ${job.long}`} */} {company.website} -{" "}
             {company.city_name}
           </span>
+
           {company.content && (
             <ExpandableText
               content={company.content}

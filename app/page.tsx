@@ -35,7 +35,15 @@ export default async function Index() {
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
-        <h2 className="text-2xl font-bold">Companies</h2>
+        <div className="flex">
+          <h2 className="text-2xl font-bold">Companies</h2>
+          <Link
+            href="/company/new"
+            className="ml-auto py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover transition-colors"
+          >
+            Add Company
+          </Link>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {company ? (
             company.map((c) => <CompanyCard key={c.id} {...c} />)

@@ -2,6 +2,7 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import slugify from "slugify";
+import FileuploadInput from "./Fileupload";
 
 export default async function NewCompany() {
   const addCompany = async (formData: FormData) => {
@@ -25,7 +26,7 @@ export default async function NewCompany() {
     const supabase = createServerActionClient({ cookies });
     const { data: user } = await supabase.auth.getUser();
 
-    console.log("user", user);
+    // console.log("user", user);
 
     await supabase.from("company").insert({
       slug,
@@ -40,6 +41,7 @@ export default async function NewCompany() {
       //   youtube,
       //   user_id: user?.user?.id,
     });
+
     revalidatePath("/company/new");
   };
 
@@ -81,6 +83,10 @@ export default async function NewCompany() {
             placeholder="Logo"
             className={inputClassName}
           />
+        </fieldset>
+        <fieldset className={fieldsetClass}>
+          <label htmlFor="file">File</label>
+          <FileuploadInput />
         </fieldset>
         <fieldset className={fieldsetClass}>
           <label htmlFor="website">Website</label>
@@ -153,3 +159,21 @@ export default async function NewCompany() {
     </form>
   );
 }
+
+const handleFormSubmit = async (e) => {
+  "use client";
+  e.preventDefault();
+  const avatarFile = e.target.files[0];
+
+  const { data, error } = await supabase.storage
+    .from("test")
+    .upload("/public/meme1.jpg", avatarFile);
+  if (error) {
+    // Handle error
+    console.log(error);
+  } else {
+    // Handle success
+    console.log(data);
+    console.log("File uploaded successfully.");
+  }
+};
