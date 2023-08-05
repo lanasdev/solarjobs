@@ -1,12 +1,11 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import LogoutButton from "@/components/LogoutButton";
 
 import { Job } from "@/lib/types";
 import JobCard from "./JobCard";
 import CompanyCard from "./CompanyCard";
-import Hero from "./Hero";
+import Hero from "@/components/Hero";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
@@ -21,10 +20,10 @@ export default async function Index() {
     .select("*");
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
-        <Hero />
+    <div className="">
+      <Hero />
 
+      <div className=" mx-auto container animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
         <h2 className="text-2xl font-bold">Solar Jobs</h2>

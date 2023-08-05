@@ -16,9 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <main className="min-h-screen bg-background flex flex-col items-center">
-          {children}
-        </main>
+        <main className="min-h-screen bg-background">{children}</main>
         <Footer />
       </body>
     </html>
