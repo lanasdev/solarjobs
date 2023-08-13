@@ -30,12 +30,12 @@ export default function JobCard(job: Job) {
   return (
     <Link
       key={job.slug}
-      className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mb-4"
+      className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mb-4 bg-background text-foreground "
       href={`/job/${job.slug}`}
       // target="_blank"
       // rel="noreferrer"
     >
-      <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
+      <h3 className="font-bold mb-2 min-h-[40px] lg:min-h-[60px]">
         {job.name}
       </h3>
       <div className="flex flex-col grow gap-4 justify-between">

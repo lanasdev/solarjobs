@@ -6,6 +6,7 @@ import { Job } from "@/lib/types";
 import ProductGridItems from "@/app/JobCard";
 import JobCard from "@/app/JobCard";
 import { notFound } from "next/navigation";
+import MainSearchBar from "@/components/MainSearchBar";
 // import { defaultSort, sorting } from 'lib/constants';
 
 export const runtime = "edge";
@@ -37,20 +38,26 @@ export default async function SearchPage({
     .order("created_at", { ascending: false });
 
   //   console.log(jobs);
+  const { data: allJobs, error: errallJobs } = await supabase
+    .from("jobs")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(6);
 
   if (error) {
     console.error(error);
   }
   if (!jobs) notFound();
 
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const resultsText = jobs.length > 1 ? "results" : "result";
 
   return (
     <>
-      <div className="">
+      <div className="bg-background text-foreground">
         <h1 className="text-2xl font-bold mb-2 pb-8 ">Search Page</h1>
+        <MainSearchBar />
         {searchValue ? (
           <p>
             {jobs.length === 0
@@ -66,7 +73,13 @@ export default async function SearchPage({
               <JobCard key={job.slug} {...job} />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <div className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {allJobs?.map((job: Job) => (
+              <JobCard key={job.slug} {...job} />
+            ))}
+          </div>
+        )}
         {/* <div className="py-16">
           <pre>{JSON.stringify(jobs, null, 2)}</pre>
         </div> */}

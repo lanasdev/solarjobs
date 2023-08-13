@@ -3,6 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { createClient } from "@supabase/supabase-js";
 
+// Test page
 const FileuploadPage = () => {
   // Create a Supabase client configured to use cookies
   const supabase = createClientComponentClient();
@@ -24,7 +25,7 @@ const FileuploadPage = () => {
   //     }
   //   }
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e: any) => {
     "use client";
     e.preventDefault();
     const avatarFile = e.target.files[0];

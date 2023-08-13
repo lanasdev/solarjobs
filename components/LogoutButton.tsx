@@ -16,7 +16,7 @@ export default function LogoutButton() {
 
   return (
     <button
-      className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover transition-colors"
+      className="rounded-md bg-btn-background px-4 py-2 font-medium no-underline transition-colors hover:bg-btn-background-hover"
       onClick={signOut}
     >
       Logout

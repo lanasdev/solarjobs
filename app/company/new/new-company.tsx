@@ -49,6 +49,7 @@ export default async function NewCompany() {
   const inputClassName =
     "border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
 
+  // TODO: Move file upload form into this component and make it server side
   return (
     <form action={addCompany} className="pt-8">
       <div className="grid grid-cols-2 gap-4">
@@ -152,7 +153,7 @@ export default async function NewCompany() {
       </div>
       <button
         type="submit"
-        className="mt-8 bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2"
+        className="mt-8 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         Create Company
       </button>
@@ -160,20 +161,20 @@ export default async function NewCompany() {
   );
 }
 
-const handleFormSubmit = async (e) => {
-  "use client";
-  e.preventDefault();
-  const avatarFile = e.target.files[0];
+// const handleFormSubmit = async (e: any) => {
+//   "use client";
+//   e.preventDefault();
+//   const avatarFile = e.target.files[0];
 
-  const { data, error } = await supabase.storage
-    .from("test")
-    .upload("/public/meme1.jpg", avatarFile);
-  if (error) {
-    // Handle error
-    console.log(error);
-  } else {
-    // Handle success
-    console.log(data);
-    console.log("File uploaded successfully.");
-  }
-};
+//   const { data, error } = await supabase.storage
+//     .from("test")
+//     .upload("/public/meme1.jpg", avatarFile);
+//   if (error) {
+//     // Handle error
+//     console.log(error);
+//   } else {
+//     // Handle success
+//     console.log(data);
+//     console.log("File uploaded successfully.");
+//   }
+// };

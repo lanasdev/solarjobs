@@ -11,10 +11,10 @@ export default async function Navbar() {
   } = await supabase.auth.getUser();
 
   return (
-    <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
+    <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10 bg-background text-foreground">
+      <div className="flex w-full max-w-4xl items-center justify-between p-3 text-sm text-foreground">
         <div className="">
-          <Link href="/" className=" font-bold text-xl">
+          <Link href="/" className=" text-xl font-bold">
             SolarJobs
           </Link>
         </div>
@@ -22,13 +22,13 @@ export default async function Navbar() {
         <div className="flex items-center gap-6">
           {user ? (
             <div className="flex items-center gap-4">
-              Hey, {user.email}!
+              <span className="hidden sm:inline-block">Hey, {user.email}!</span>
               <LogoutButton />
             </div>
           ) : (
             <Link
               href="/login"
-              className="py-2 px-4 rounded-md no-underline transition-colors bg-btn-background hover:bg-btn-background-hover"
+              className="rounded-md bg-btn-background px-4 py-2 font-medium no-underline transition-colors hover:bg-btn-background-hover"
             >
               Login
             </Link>
@@ -36,7 +36,7 @@ export default async function Navbar() {
           <div className="">
             <Link
               href="/job/hire"
-              className="py-2 px-4 rounded-md no-underline bg-yellow-400 hover:bg-yellow-700 transition-colors hover:text-white"
+              className="rounded-md bg-yellow-400 px-4 py-2 font-medium no-underline transition-colors hover:bg-yellow-700 hover:text-white"
             >
               Post a Job
             </Link>
