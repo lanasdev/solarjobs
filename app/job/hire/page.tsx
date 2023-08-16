@@ -6,6 +6,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import NewJobForm from "./new-job";
+import SectionContainer from "@/components/SectionContainer";
 
 export default async function NewJobPage() {
   const supabase = createServerComponentClient({ cookies });
@@ -16,15 +17,17 @@ export default async function NewJobPage() {
 
   if (!user) {
     return (
-      <div className="pt-16">
-        <h1 className="text-2xl font-bold">Create a new Job</h1>
-        <div className="">
-          <p>You must be logged in to create a new job.</p>
-          <Link href="/login" className="text-blue-500 hover:underline">
-            Login
-          </Link>
+      <SectionContainer>
+        <div className="pt-16">
+          <h1 className="text-2xl font-bold">Create a new Job</h1>
+          <div className="">
+            <p>You must be logged in to create a new job.</p>
+            <Link href="/login" className="text-blue-500 hover:underline">
+              Login
+            </Link>
+          </div>
         </div>
-      </div>
+      </SectionContainer>
     );
   }
   const { data: company, error: errcompany } = await supabase
@@ -35,13 +38,15 @@ export default async function NewJobPage() {
   const c = company;
 
   return (
-    <div className="pt-16">
-      <h1 className="text-2xl font-bold">Create a new Job</h1>
-      <div className="">
-        {/* <code>{JSON.stringify(c, null, 2)}</code> */}
-        {/* @ts-ignore */}
-        <NewJobForm company={c} />
+    <SectionContainer>
+      <div className="pt-16">
+        <h1 className="text-2xl font-bold">Create a new Job</h1>
+        <div className="">
+          {/* <code>{JSON.stringify(c, null, 2)}</code> */}
+          {/* @ts-ignore */}
+          <NewJobForm company={c} />
+        </div>
       </div>
-    </div>
+    </SectionContainer>
   );
 }

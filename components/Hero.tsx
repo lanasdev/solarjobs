@@ -14,6 +14,7 @@ export default function Hero() {
         <Image
           src={HeroImg2}
           alt="Solar Jobs Hero"
+          priority={true}
           className="h-80 w-full object-cover lg:h-96"
         />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-4 text-slate-100 sm:px-0">

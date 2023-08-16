@@ -27,11 +27,11 @@ export default function SearchBar() {
         id="search"
         placeholder="Search for jobs"
         autoFocus
-        className="rounded-t-md border-gray-300 text-slate-900 accent-yellow-500 shadow-sm sm:text-sm sm:leading-5 md:rounded-l-md"
+        className="rounded-t-md border-b-0 border-gray-300 text-slate-900 accent-yellow-500 shadow-sm sm:text-sm sm:leading-5 md:rounded-l-md md:border-r-0"
       />
       <button
         type="submit"
-        className="btn btn-primary rounded-b-md border-2 border-white border-t-transparent bg-slate-900 px-4 py-2 font-semibold text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 md:rounded-r-md md:border-t-inherit"
+        className="btn btn-primary border-t-none rounded-b-md border-2 border-t-0 border-white bg-slate-900 px-4 py-2 font-semibold text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 md:rounded-l-none md:rounded-r-md md:border-l-0 md:border-t-2"
       >
         Search
       </button>
