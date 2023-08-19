@@ -136,7 +136,7 @@ export default function Login() {
             )}
           </form>
         )}
-        <form className="flex w-full flex-row justify-around gap-2 text-foreground">
+        <div className="flex w-full flex-row justify-around gap-2 text-foreground">
           <button
             className="group flex w-24 items-center rounded-md bg-slate-900 px-4 py-2 text-sm text-foreground text-slate-100 no-underline hover:bg-btn-background-hover "
             onClick={async () => {
@@ -159,7 +159,7 @@ export default function Login() {
           >
             Google
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

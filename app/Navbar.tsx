@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
+import UserNav from "@/components/UserNav";
 
 export default async function Navbar() {
   const supabase = createServerComponentClient({ cookies });
@@ -20,11 +21,14 @@ export default async function Navbar() {
         </div>
 
         <div className="flex items-center gap-6">
+          <Link
+            href="/job/hire"
+            className="rounded-md bg-yellow-400 px-4 py-2 font-medium no-underline transition-colors hover:bg-yellow-700 hover:text-white"
+          >
+            Post a Job
+          </Link>
           {user ? (
-            <div className="flex items-center gap-4">
-              <span className="hidden sm:inline-block">Hey, {user.email}!</span>
-              <LogoutButton />
-            </div>
+            <UserNav />
           ) : (
             <Link
               href="/login"
@@ -33,14 +37,6 @@ export default async function Navbar() {
               Login
             </Link>
           )}
-          <div className="">
-            <Link
-              href="/job/hire"
-              className="rounded-md bg-yellow-400 px-4 py-2 font-medium no-underline transition-colors hover:bg-yellow-700 hover:text-white"
-            >
-              Post a Job
-            </Link>
-          </div>
         </div>
       </div>
     </nav>

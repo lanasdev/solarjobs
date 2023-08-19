@@ -23,27 +23,27 @@ export default async function Index() {
     <div className="">
       <Hero />
 
-      <div className=" mx-auto container animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
-        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+      <div className=" container mx-auto flex max-w-4xl flex-col gap-14 px-3 py-16 text-foreground opacity-0 animate-in lg:py-24">
+        <div className="w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent p-[1px]" />
 
         <h2 className="text-2xl font-bold">Solar Jobs</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {jobs && jobs.map((job) => <JobCard key={job.id} {...job} />)}
         </div>
 
-        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+        <div className="w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent p-[1px]" />
 
         <div className="flex">
           <h2 className="text-2xl font-bold">Companies</h2>
           <Link
             href="/company/new"
-            className="ml-auto py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover transition-colors"
+            className="ml-auto rounded-md bg-btn-background px-4 py-2 no-underline transition-colors hover:bg-btn-background-hover"
           >
             Add Company
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {company ? (
             company.map((c) => <CompanyCard key={c.id} {...c} />)
           ) : (
