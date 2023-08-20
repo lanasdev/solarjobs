@@ -14,6 +14,7 @@ export default function Hero() {
         <Image
           src={HeroImg2}
           alt="Solar Jobs Hero"
+          placeholder="blur"
           priority={true}
           className="h-80 w-full object-cover lg:h-96"
         />
