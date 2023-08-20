@@ -6,6 +6,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import NewCompany from "./new-company";
 import { redirect } from "next/navigation";
+import SectionContainer from "@/components/SectionContainer";
 
 export const dynamic = "force-dynamic";
 
@@ -25,9 +26,9 @@ export default async function CompanyCard() {
     .select("*");
 
   return (
-    <div className="pt-16">
+    <SectionContainer classNames="pt-16">
       <h1 className="text-2xl font-bold">Create a new Company</h1>
       <NewCompany />
-    </div>
+    </SectionContainer>
   );
 }

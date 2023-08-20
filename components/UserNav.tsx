@@ -47,7 +47,7 @@ export default async function UserNav() {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src={profile.avatar} alt="@shadcn" />
-            <AvatarFallback>ME</AvatarFallback>
+            <AvatarFallback>{generateInitials(profile) || "ME"}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -64,9 +64,9 @@ export default async function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          <DropdownMenuItem textValue="Profile">
+            <Link href="/profile">Profile</Link>
+            <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             Billing
@@ -90,6 +90,12 @@ export default async function UserNav() {
   );
 }
 
+/**
+ *  generate the initials from the first and last name as a placeholder for the avatar
+ * @param first_name
+ * @param last_name
+ * @returns the initials (max 2 chars) as a string
+ */
 function generateInitials({
   first_name,
   last_name,
