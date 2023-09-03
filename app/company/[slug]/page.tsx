@@ -26,7 +26,7 @@ export default async function JobPage({
       name,
         description
     )
-  `
+  `,
     )
     .eq("slug", params.slug);
 
@@ -46,12 +46,12 @@ export default async function JobPage({
       <Link href="/" className="hover:underline">
         Go back home
       </Link>
-      <div className="flex flex-col xl:flex-row xl:gap-16 justify-between py-16">
+      <div className="flex flex-col justify-between py-16 xl:flex-row xl:gap-16">
         <main className="">
-          <div className="flex flex-col md:flex-row md:items-end gap-8">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end">
             <img
               src={c.logo}
-              className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 "
+              className="h-24 w-24 rounded-full bg-slate-200 group-hover:bg-slate-300 "
             />
             <div className="">
               <h1 className="text-2xl font-bold">{c.name}</h1>
@@ -63,7 +63,7 @@ export default async function JobPage({
           {user?.id === c.user_id && (
             <Link
               href={`/company/${c.slug}/edit`}
-              className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-lg mt-8 inline-block"
+              className="mt-8 inline-block rounded-lg bg-blue-400 px-4 py-2 text-white hover:bg-blue-500"
             >
               Edit Company Profile
             </Link>
@@ -71,16 +71,16 @@ export default async function JobPage({
 
           <div className="pt-12 ">
             <h2 className="text-xl font-semibold">Jobs</h2>
-            <div className="flex overflow-x-auto space-x-8 pt-8 [&>*]:flex-shrink-0 ">
+            <div className="flex space-x-8 overflow-x-auto pt-8 [&>*]:flex-shrink-0 ">
               {c.jobs.map((job: Job) => (
                 <JobCard key={job.slug} {...job} />
               ))}
             </div>
           </div>
 
-          <div className="py-16 max-w-xl">
+          {/* <div className="max-w-xl py-16">
             <pre>{JSON.stringify(c, null, 2)}</pre>
-          </div>
+          </div> */}
         </main>
         {/* <aside className="xl:w-1/3 group bg-white shadow-lg rounded-lg px-4 py-6">
           <div className="rounded-full bg-slate-200 group-hover:bg-slate-300 w-24 h-24 mb-8 " />

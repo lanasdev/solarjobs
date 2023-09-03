@@ -56,7 +56,7 @@ export default async function SearchPage({
   return (
     <>
       <div className="bg-background text-foreground">
-        <h1 className="text-2xl font-bold mb-2 pb-8 ">Search Page</h1>
+        <h1 className="mb-2 pb-8 text-2xl font-bold ">Search Page</h1>
         <MainSearchBar />
         {searchValue ? (
           <p>
@@ -75,9 +75,7 @@ export default async function SearchPage({
           </div>
         ) : (
           <div className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {allJobs?.map((job: Job) => (
-              <JobCard key={job.slug} {...job} />
-            ))}
+            {allJobs?.map((job: Job) => <JobCard key={job.slug} {...job} />)}
           </div>
         )}
         {/* <div className="py-16">

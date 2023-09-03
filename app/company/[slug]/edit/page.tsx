@@ -32,7 +32,7 @@ export default async function CompanyEditPage({
       name,
         description
     )
-  `
+  `,
     )
     .eq("slug", params.slug);
 

@@ -72,7 +72,7 @@ export default async function EditCompany({ company }: { company: Company }) {
 
   return (
     <form action={editCompany} className="pt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <fieldset className={fieldsetClass}>
           <label htmlFor="name">Name</label>
           <input
@@ -190,13 +190,13 @@ export default async function EditCompany({ company }: { company: Company }) {
 
       <button
         type="submit"
-        className="mt-8 bg-blue-500 hover:bg-blue-600 text-white transition-colors rounded-lg px-4 py-2"
+        className="mt-8 rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
       >
         Save
       </button>
       <Link
         href={`/company/${company.slug}`}
-        className="bg-slate-400 hover:bg-red-500 hover:text-white transition-colors rounded-lg px-4 py-2 ml-4"
+        className="ml-4 rounded-lg bg-slate-400 px-4 py-2 transition-colors hover:bg-red-500 hover:text-white"
       >
         Go Back
       </Link>

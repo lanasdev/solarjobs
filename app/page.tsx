@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-import { Job } from "@/lib/types";
+import { Job, Company } from "@/lib/types";
 import JobCard from "./JobCard";
 import CompanyCard from "./CompanyCard";
 import Hero from "@/components/Hero";
@@ -17,7 +17,9 @@ export default async function Index() {
   const { data: jobs, error } = await supabase.from("jobs").select("*");
   const { data: company, error: errcompany } = await supabase
     .from("company")
-    .select("*");
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(6);
 
   return (
     <div className="">

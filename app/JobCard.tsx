@@ -30,17 +30,17 @@ export default function JobCard(job: Job) {
   return (
     <Link
       key={job.slug}
-      className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mb-4 bg-background text-foreground "
+      className="group relative mb-4 flex flex-col rounded-lg border bg-background p-6 text-foreground hover:border-foreground "
       href={`/job/${job.slug}`}
       // target="_blank"
       // rel="noreferrer"
     >
-      <h3 className="font-bold mb-2 min-h-[40px] lg:min-h-[60px]">
+      <h3 className="mb-2 min-h-[40px] font-bold lg:min-h-[60px]">
         {job.name}
       </h3>
-      <div className="flex flex-col grow gap-4 justify-between">
+      <div className="flex grow flex-col justify-between gap-4">
         <p className="text-sm opacity-70">{job.description}</p>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <svg
             width="24"
             height="24"
@@ -69,7 +69,7 @@ export default function JobCard(job: Job) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="ml-2 h-4 w-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all"
+            className="ml-2 h-4 w-4 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
           >
             <polyline points="9 18 15 12 9 6" />
           </svg>

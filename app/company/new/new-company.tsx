@@ -3,47 +3,10 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import slugify from "slugify";
 import FileuploadInput from "./Fileupload";
+import { addCompany } from "@/app/actions";
 
 export default async function NewCompany() {
-  const addCompany = async (formData: FormData) => {
-    "use server";
-    // get name from input
-    const name = formData.get("name");
-    if (!name) return;
-
-    const description = formData.get("description");
-    const logo = formData.get("logo");
-    const website = formData.get("website");
-    // const city = formData.get("city");
-    // const staff_count = formData.get("staff_count");
-    // const twitter = formData.get("twitter");
-    // const instagram = formData.get("instagram");
-    // const youtube = formData.get("youtube");
-
-    // @ts-expect-error slugify types are wrong
-    const slug = slugify(name, { lower: true, strict: true });
-
-    const supabase = createServerActionClient({ cookies });
-    const { data: user } = await supabase.auth.getUser();
-
-    // console.log("user", user);
-
-    await supabase.from("company").insert({
-      slug,
-      name,
-      description,
-      logo,
-      website,
-      //   city,
-      //   staff_count,
-      //   twitter,
-      //   instagram,
-      //   youtube,
-      //   user_id: user?.user?.id,
-    });
-
-    revalidatePath("/company/new");
-  };
+  
 
   const fieldsetClass = "flex flex-col gap-4 pt-8";
   const inputClassName =
@@ -85,10 +48,10 @@ export default async function NewCompany() {
             className={inputClassName}
           />
         </fieldset>
-        <fieldset className={fieldsetClass}>
+        {/* <fieldset className={fieldsetClass}>
           <label htmlFor="file">File</label>
           <FileuploadInput />
-        </fieldset>
+        </fieldset> */}
         <fieldset className={fieldsetClass}>
           <label htmlFor="website">Website</label>
           <input

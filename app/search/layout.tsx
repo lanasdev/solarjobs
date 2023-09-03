@@ -8,5 +8,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="mx-auto container pt-16 pb-64">{children}</div>;
+  return <div className="container mx-auto pb-64 pt-16">{children}</div>;
 }
